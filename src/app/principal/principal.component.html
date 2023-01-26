@@ -1,0 +1,67 @@
+<div class="container p-5">
+    <div class="row">
+        <div class="col-sm-12">
+            <h2 class="info-h2-estudiante">Listado de estudiantes</h2>
+            <ol class="list-group list-group-numbered">
+                <li *ngFor="let estudiante of listadoEstudiantes" class="list-group-item d-flex justify-content-between align-items-start {{ estudiante.estaActivo == true ? 'list-group-item-light' : 'list-group-item-dark' }}">
+                    <div class="ms-2 me-auto">
+                        <div class="fw-bold">Código de estudiante: {{ estudiante.codigo }}</div>
+                        <div class="mb-3 mt-3">
+                            <div class="card-body">
+                                <div class="card-text">
+                                    <div class="row">
+                                        <div class="col-sm-5">
+                                            <img *ngIf="estudiante.foto != ''" src="{{ estudiante.foto }}" alt="{{ estudiante.nombre }} {{ estudiante.apellido }}" appDirectivaGeneral class="img-estudiante img-fluid rounded-circle mb-3 img-thumbnail shadow-sm">
+                                            <img *ngIf="estudiante.foto == ''" [src]="estudiante.sexo == 'H' ? 'assets/images/sfh.jpg' : 'assets/images/sfm.jpg'" alt="{{ estudiante.nombre }} {{ estudiante.apellido }}" appDirectivaGeneral class="img-estudiante img-fluid rounded-circle mb-3 img-thumbnail shadow-sm">
+                                            <p>Código de país: {{ estudiante.pais }}</p>
+                                            <div [ngSwitch]="estudiante.pais">
+                                                <table *ngSwitchCase="'EC'" class="table table-borderless">
+                                                    <tbody>
+                                                        <tr><td style="background-color: yellow"></td></tr>
+                                                        <tr><td style="background-color: yellow"></td></tr>
+                                                        <tr><td style="background-color: blue"></td></tr>
+                                                        <tr><td style="background-color: red"></td></tr>
+                                                    </tbody>
+                                                </table>
+                                                <table *ngSwitchCase="'AR'" class="table table-borderless">
+                                                    <tbody>
+                                                        <tr><td style="background-color: lightblue"></td></tr>
+                                                        <tr><td style="background-color: white"></td></tr>
+                                                        <tr><td style="background-color: lightblue"></td></tr>
+                                                    </tbody>
+                                                </table>
+                                                <table *ngSwitchDefault class="table table-borderless">
+                                                    <tbody>
+                                                        <tr><td style="background-color: gray"></td></tr>
+                                                        <tr><td style="background-color: gray"></td></tr>
+                                                        <tr><td style="background-color: gray"></td></tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-7">
+                                            <div class="info-box-estudiante" [style.border]="estudiante.estaActivo == false ? '1px solid red' : '0'">
+                                                <p><b>Nombre:</b> {{ estudiante.nombre | uppercase }}</p>
+                                                <p><b>Apellido:</b> {{ estudiante.apellido | uppercase }}</p>
+                                                <p>
+                                                    <b>Está matriculado:</b> {{ estudiante.estaMatriculado == true ? 'SI' : 'NO' }}
+                                                    <button *ngIf="estudiante.estaMatriculado == false" class="btn btn-primary mt-3">Matricular</button>
+                                                </p>
+                                                <p><b>Activo:</b> {{ estudiante.estaActivo == true ? 'SI' : 'NO' }}</p>
+                                                <p class="mb-0"><b>Sexo:</b> {{ estudiante.sexo }}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <span [ngClass]="estudiante.edad <= 18 ? 'badge bg-danger rounded-pill' : estudiante.edad > 18 && estudiante.edad < 30 ? 'badge bg-primary rounded-pill': 'badge bg-warning rounded-pill'">{{ estudiante.edad }} años</span>
+                </li>
+            </ol>
+        </div>
+    </div>
+</div>
+<!--https://getbootstrap.com/docs/5.0/components/list-group/-->
+<!--https://github.com/AbnerGarcia96/Comision-40510-Angular/tree/main/04-Interpolacion%20y%20Directivas/Demo/src-->
+<!--https://docs.google.com/presentation/d/1urPcWgOlAMTNeif4F1M3D6wvOKYUTjkiSEcJ76qYjao/preview?slide=id.ge776db2c2e_0_21-->
